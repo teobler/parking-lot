@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SetupTest {
+public class OOBootcampTest {
 
     @Test
     void should_welcome_you_come_oo_bootcamp() {
