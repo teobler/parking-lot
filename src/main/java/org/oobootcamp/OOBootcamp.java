@@ -1,4 +1,6 @@
-package org.oobootcamp.warmup.length;
+package org.oobootcamp;
+
 
 public record OOBootcamp(String message) {
+
 }
