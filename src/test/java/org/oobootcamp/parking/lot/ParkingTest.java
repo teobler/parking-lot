@@ -69,7 +69,7 @@ public class ParkingTest {
         Car car1 = new Car("uuid1");
 
 
-        String ticket = parking.park(car1);
+        Ticket ticket = parking.park(car1);
 
         assertThat(ticket).isNotNull();
     }
@@ -78,9 +78,9 @@ public class ParkingTest {
     void should_return_a_car_when_pick_up_a_car_given_a_valid_ticket() {
         Parking parking = new Parking(1);
         Car car1 = new Car("uuid1");
-        String ticket = parking.park(car1);
+        Ticket ticket = parking.park(car1);
 
-        Car car2 = parking.pickUp(ticket);
+        Object car2 = parking.pickUp(ticket);
 
         assertThat(car1).isEqualTo(car2);
     }
@@ -90,7 +90,7 @@ public class ParkingTest {
     void should_show_tip_when_pick_up_a_car_given_a_ticket_twice() {
         Parking parking = new Parking(1);
         Car car1 = new Car("uuid1");
-        String ticket = parking.park(car1);
+        Ticket ticket = parking.park(car1);
 
         parking.pickUp(ticket);
         parking.pickUp(ticket);
@@ -104,7 +104,7 @@ public class ParkingTest {
         Car car1 = new Car("uuid1");
         parking.park(car1);
 
-        parking.pickUp("invalid");
+        parking.pickUp(new Ticket("invalid"));
 
         assertThat(outContent.toString()).isEqualTo("无效票");
     }
