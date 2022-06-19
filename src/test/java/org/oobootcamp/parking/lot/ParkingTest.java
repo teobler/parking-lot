@@ -1,28 +1,12 @@
 package org.oobootcamp.parking.lot;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingTest {
-
-    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    PrintStream originalOut = System.out;
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-    }
 
     @Test
     void should_return_specific_parking_when_create_parking_given_specific_parking_lot_number() {
@@ -46,9 +30,9 @@ public class ParkingTest {
         Parking parking = new Parking(0);
         Car car = new Car("uuid");
 
-        parking.park(car);
+        Throwable exception = assertThrows(RuntimeException.class, () -> parking.park(car));
 
-        assertThat(outContent.toString()).isEqualTo("停车场车位已满");
+        assertThat(exception.getMessage()).isEqualTo("停车场车位已满");
     }
 
     @Test
@@ -56,11 +40,11 @@ public class ParkingTest {
         Parking parking = new Parking(1);
         Car car1 = new Car("uuid1");
         Car car2 = new Car("uuid2");
-
         parking.park(car1);
-        parking.park(car2);
 
-        assertThat(outContent.toString()).isEqualTo("停车场车位已满");
+        Throwable exception = assertThrows(RuntimeException.class, () -> parking.park(car2));
+
+        assertThat(exception.getMessage()).isEqualTo("停车场车位已满");
     }
 
     @Test
@@ -91,11 +75,11 @@ public class ParkingTest {
         Parking parking = new Parking(1);
         Car car1 = new Car("uuid1");
         Ticket ticket = parking.park(car1);
-
-        parking.pickUp(ticket);
         parking.pickUp(ticket);
 
-        assertThat(outContent.toString()).isEqualTo("无效票");
+        Throwable exception = assertThrows(RuntimeException.class, () -> parking.pickUp(ticket));
+
+        assertThat(exception.getMessage()).isEqualTo("无效票");
     }
 
     @Test
@@ -104,8 +88,8 @@ public class ParkingTest {
         Car car1 = new Car("uuid1");
         parking.park(car1);
 
-        parking.pickUp(new Ticket("invalid"));
+        Throwable exception = assertThrows(RuntimeException.class, () -> parking.pickUp(new Ticket("invalid")));
 
-        assertThat(outContent.toString()).isEqualTo("无效票");
+        assertThat(exception.getMessage()).isEqualTo("无效票");
     }
 }

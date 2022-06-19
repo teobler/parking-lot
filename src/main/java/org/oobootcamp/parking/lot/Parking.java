@@ -18,8 +18,7 @@ public class Parking {
 
     public Ticket park(Car car) {
         if (this.parkingLotNumber == 0) {
-            System.out.print("停车场车位已满");
-            return null;
+            throw new RuntimeException("停车场车位已满");
         }
         this.parkingLotNumber -= 1;
         Ticket ticket = new Ticket(UUID.randomUUID().toString());
@@ -30,8 +29,7 @@ public class Parking {
     public Object pickUp(Ticket ticket) {
         Object car = this.parkingLots.get(ticket);
         if (car == null) {
-            System.out.print("无效票");
-            return null;
+            throw new RuntimeException("无效票");
         }
         this.parkingLots.remove(ticket);
         return car;
