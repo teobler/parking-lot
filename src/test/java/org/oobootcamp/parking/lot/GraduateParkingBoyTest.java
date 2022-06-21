@@ -1,6 +1,8 @@
 package org.oobootcamp.parking.lot;
 
 import org.junit.jupiter.api.Test;
+import org.oobootcamp.parking.lot.exception.FullyParkedException;
+import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 
 import java.util.List;
 
@@ -59,9 +61,7 @@ class GraduateParkingBoyTest {
         List<Parking> parkingList = List.of(parking1);
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
 
-        Throwable exception = assertThrows(RuntimeException.class, () -> graduateParkingBoy.park(car2));
-
-        assertThat(exception.getMessage()).isEqualTo("停车场车位已满");
+        assertThrows(FullyParkedException.class, () -> graduateParkingBoy.park(car2));
     }
 
     @Test
@@ -89,9 +89,7 @@ class GraduateParkingBoyTest {
         Ticket ticket = graduateParkingBoy.park(car1);
         graduateParkingBoy.pickUp(ticket);
 
-        Throwable exception = assertThrows(RuntimeException.class, () -> graduateParkingBoy.pickUp(ticket));
-
-        assertThat(exception.getMessage()).isEqualTo("无效票");
+        assertThrows(InvalidTicketException.class, () -> graduateParkingBoy.pickUp(ticket));
     }
 
     @Test
@@ -102,8 +100,6 @@ class GraduateParkingBoyTest {
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
         graduateParkingBoy.park(car1);
 
-        Throwable exception = assertThrows(RuntimeException.class, () -> graduateParkingBoy.pickUp(new Ticket()));
-
-        assertThat(exception.getMessage()).isEqualTo("无效票");
+        assertThrows(InvalidTicketException.class, () -> graduateParkingBoy.pickUp(new Ticket()));
     }
 }

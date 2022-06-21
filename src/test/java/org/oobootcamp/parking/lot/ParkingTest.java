@@ -1,6 +1,8 @@
 package org.oobootcamp.parking.lot;
 
 import org.junit.jupiter.api.Test;
+import org.oobootcamp.parking.lot.exception.FullyParkedException;
+import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -30,9 +32,7 @@ public class ParkingTest {
         Parking parking = new Parking(0);
         Car car = new Car();
 
-        Throwable exception = assertThrows(RuntimeException.class, () -> parking.park(car));
-
-        assertThat(exception.getMessage()).isEqualTo("停车场车位已满");
+        assertThrows(FullyParkedException.class, () -> parking.park(car));
     }
 
     @Test
@@ -42,9 +42,7 @@ public class ParkingTest {
         Car car2 = new Car();
         parking.park(car1);
 
-        Throwable exception = assertThrows(RuntimeException.class, () -> parking.park(car2));
-
-        assertThat(exception.getMessage()).isEqualTo("停车场车位已满");
+        assertThrows(FullyParkedException.class, () -> parking.park(car2));
     }
 
     @Test
@@ -77,9 +75,7 @@ public class ParkingTest {
         Ticket ticket = parking.park(car1);
         parking.pickUp(ticket);
 
-        Throwable exception = assertThrows(RuntimeException.class, () -> parking.pickUp(ticket));
-
-        assertThat(exception.getMessage()).isEqualTo("无效票");
+        assertThrows(InvalidTicketException.class, () -> parking.pickUp(ticket));
     }
 
     @Test
@@ -88,8 +84,6 @@ public class ParkingTest {
         Car car1 = new Car();
         parking.park(car1);
 
-        Throwable exception = assertThrows(RuntimeException.class, () -> parking.pickUp(new Ticket()));
-
-        assertThat(exception.getMessage()).isEqualTo("无效票");
+        assertThrows(InvalidTicketException.class, () -> parking.pickUp(new Ticket()));
     }
 }

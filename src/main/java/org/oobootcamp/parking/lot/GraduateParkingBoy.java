@@ -1,5 +1,8 @@
 package org.oobootcamp.parking.lot;
 
+import org.oobootcamp.parking.lot.exception.FullyParkedException;
+import org.oobootcamp.parking.lot.exception.InvalidTicketException;
+
 import java.util.List;
 
 public class GraduateParkingBoy {
@@ -13,7 +16,7 @@ public class GraduateParkingBoy {
         return this.parkingList.stream()
                 .filter(parking -> parking.getParkingLotNumber() > 0)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("停车场车位已满"))
+                .orElseThrow(FullyParkedException::new)
                 .park(car);
     }
 
@@ -21,7 +24,7 @@ public class GraduateParkingBoy {
         return this.parkingList.stream()
                 .filter(parking -> parking.hasCar(ticket))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("无效票"))
+                .orElseThrow(InvalidTicketException::new)
                 .pickUp(ticket);
     }
 }

@@ -1,5 +1,8 @@
 package org.oobootcamp.parking.lot;
 
+import org.oobootcamp.parking.lot.exception.FullyParkedException;
+import org.oobootcamp.parking.lot.exception.InvalidTicketException;
+
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -18,7 +21,7 @@ public class Parking {
 
     public Ticket park(Car car) {
         if (this.parkingLotNumber == 0) {
-            throw new RuntimeException("停车场车位已满");
+            throw new FullyParkedException();
         }
         this.parkingLotNumber -= 1;
         Ticket ticket = new Ticket();
@@ -29,7 +32,7 @@ public class Parking {
     public Car pickUp(Ticket ticket) {
         Car car = this.parkingLots.get(ticket);
         if (car == null) {
-            throw new RuntimeException("无效票");
+            throw new InvalidTicketException();
         }
         this.parkingLots.remove(ticket);
         return car;
