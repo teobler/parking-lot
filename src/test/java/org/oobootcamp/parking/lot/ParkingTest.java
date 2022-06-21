@@ -20,7 +20,7 @@ public class ParkingTest {
     @Test
     void should_parking_successful_when_parking_a_car_given_1_empty_parking_lot() {
         Parking parking = new Parking(1);
-        Car car = new Car("uuid");
+        Car car = new Car();
 
         assertDoesNotThrow(() -> parking.park(car));
     }
@@ -28,7 +28,7 @@ public class ParkingTest {
     @Test
     void should_show_tip_when_parking_a_car_given_non_empty_parking_lot() {
         Parking parking = new Parking(0);
-        Car car = new Car("uuid");
+        Car car = new Car();
 
         Throwable exception = assertThrows(RuntimeException.class, () -> parking.park(car));
 
@@ -38,8 +38,8 @@ public class ParkingTest {
     @Test
     void should_show_tip_when_parking_2_car_given_1_parking_lot() {
         Parking parking = new Parking(1);
-        Car car1 = new Car("uuid1");
-        Car car2 = new Car("uuid2");
+        Car car1 = new Car();
+        Car car2 = new Car();
         parking.park(car1);
 
         Throwable exception = assertThrows(RuntimeException.class, () -> parking.park(car2));
@@ -50,7 +50,7 @@ public class ParkingTest {
     @Test
     void should_return_ticket_when_parking_a_car_successful() {
         Parking parking = new Parking(1);
-        Car car1 = new Car("uuid1");
+        Car car1 = new Car();
 
 
         Ticket ticket = parking.park(car1);
@@ -61,7 +61,7 @@ public class ParkingTest {
     @Test
     void should_return_a_car_when_pick_up_a_car_given_a_valid_ticket() {
         Parking parking = new Parking(1);
-        Car car1 = new Car("uuid1");
+        Car car1 = new Car();
         Ticket ticket = parking.park(car1);
 
         Object car2 = parking.pickUp(ticket);
@@ -73,7 +73,7 @@ public class ParkingTest {
     @Test
     void should_show_tip_when_pick_up_a_car_given_a_ticket_twice() {
         Parking parking = new Parking(1);
-        Car car1 = new Car("uuid1");
+        Car car1 = new Car();
         Ticket ticket = parking.park(car1);
         parking.pickUp(ticket);
 
@@ -85,10 +85,10 @@ public class ParkingTest {
     @Test
     void should_show_tip_when_pick_up_a_car_given_a_invalid_ticket() {
         Parking parking = new Parking(1);
-        Car car1 = new Car("uuid1");
+        Car car1 = new Car();
         parking.park(car1);
 
-        Throwable exception = assertThrows(RuntimeException.class, () -> parking.pickUp(new Ticket("invalid")));
+        Throwable exception = assertThrows(RuntimeException.class, () -> parking.pickUp(new Ticket()));
 
         assertThat(exception.getMessage()).isEqualTo("无效票");
     }

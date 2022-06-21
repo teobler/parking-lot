@@ -21,7 +21,7 @@ public class Parking {
             throw new RuntimeException("停车场车位已满");
         }
         this.parkingLotNumber -= 1;
-        Ticket ticket = new Ticket(UUID.randomUUID().toString());
+        Ticket ticket = new Ticket();
         this.parkingLots.put(ticket, car);
         return ticket;
     }
