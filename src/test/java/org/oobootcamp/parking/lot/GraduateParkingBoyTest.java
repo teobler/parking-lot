@@ -31,9 +31,8 @@ class GraduateParkingBoyTest {
 
         Ticket ticket = graduateParkingBoy.park(car);
 
-        assertThat(ticket).isNotNull();
-        assertThat(parking1.getParkingLotNumber()).isEqualTo(0);
-        assertThat(parking2.getParkingLotNumber()).isEqualTo(1);
+        Car pickedUpCar = parking1.pickUp(ticket);
+        assertThat(pickedUpCar).isSameAs(car);
     }
 
     @Test
@@ -48,8 +47,8 @@ class GraduateParkingBoyTest {
 
         Ticket ticket = graduateParkingBoy.park(car2);
 
-        assertThat(ticket).isNotNull();
-        assertThat(parking2.getParkingLotNumber()).isEqualTo(0);
+        Car pickedUpCar = parking2.pickUp(ticket);
+        assertThat(pickedUpCar).isSameAs(car2);
     }
 
     @Test

@@ -14,7 +14,7 @@ public class ParkingTest {
     void should_return_specific_parking_when_create_parking_given_specific_parking_lot_number() {
         Parking parking = new Parking(1);
 
-        assertThat(parking.getParkingLotNumber()).isEqualTo(1);
+        assertThat(parking.hasEmptyLot()).isTrue();
     }
 
     // this test is useless?

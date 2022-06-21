@@ -14,7 +14,7 @@ public class GraduateParkingBoy {
 
     public Ticket park(Car car) {
         return this.parkingList.stream()
-                .filter(parking -> parking.getParkingLotNumber() > 0)
+                .filter(Parking::hasEmptyLot)
                 .findFirst()
                 .orElseThrow(FullyParkedException::new)
                 .park(car);

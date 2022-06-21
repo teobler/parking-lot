@@ -4,41 +4,40 @@ import org.oobootcamp.parking.lot.exception.FullyParkedException;
 import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 public class Parking {
-    private int parkingLotNumber;
+    private int capacity;
 
-    private final HashMap<Ticket, Car> parkingLots = new HashMap<>();
+    private final HashMap<Ticket, Car> parkedCars = new HashMap<>();
 
-    public Parking(int parkingLotNumber) {
-        this.parkingLotNumber = parkingLotNumber;
-    }
-
-    public int getParkingLotNumber() {
-        return this.parkingLotNumber;
+    public Parking(int capacity) {
+        this.capacity = capacity;
     }
 
     public Ticket park(Car car) {
-        if (this.parkingLotNumber == 0) {
+        if (this.capacity == 0) {
             throw new FullyParkedException();
         }
-        this.parkingLotNumber -= 1;
+        this.capacity -= 1;
         Ticket ticket = new Ticket();
-        this.parkingLots.put(ticket, car);
+        this.parkedCars.put(ticket, car);
         return ticket;
     }
 
     public Car pickUp(Ticket ticket) {
-        Car car = this.parkingLots.get(ticket);
+        Car car = this.parkedCars.get(ticket);
         if (car == null) {
             throw new InvalidTicketException();
         }
-        this.parkingLots.remove(ticket);
+        this.parkedCars.remove(ticket);
         return car;
     }
 
+    public Boolean hasEmptyLot() {
+        return this.capacity > this.parkedCars.size();
+    }
+
     public Boolean hasCar(Ticket ticket) {
-        return this.parkingLots.containsKey(ticket);
+        return this.parkedCars.containsKey(ticket);
     }
 }
