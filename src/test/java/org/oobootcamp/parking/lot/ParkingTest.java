@@ -32,7 +32,7 @@ public class ParkingTest {
     }
 
     @Test
-    void should_show_tip_when_parking_a_car_given_non_empty_parking_lot() {
+    void should_show_fully_parked_tip_when_parking_a_car_given_non_empty_parking_lot() {
         Parking parking = new Parking(1);
         Car car1 = new Car();
         Car car2 = new Car();
@@ -42,7 +42,7 @@ public class ParkingTest {
     }
 
     @Test
-    void should_show_tip_when_pick_up_a_car_given_a_ticket_twice() {
+    void should_show_invalid_ticket_tip_when_pick_up_a_car_given_a_used_ticket() {
         Parking parking = new Parking(1);
         Car car1 = new Car();
         Ticket ticket = parking.park(car1);
@@ -52,7 +52,7 @@ public class ParkingTest {
     }
 
     @Test
-    void should_show_tip_when_pick_up_a_car_given_a_invalid_ticket() {
+    void should_show_invalid_ticket_tip_when_pick_up_a_car_given_a_fake_ticket() {
         Parking parking = new Parking(1);
         Car car1 = new Car();
         parking.park(car1);
