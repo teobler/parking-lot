@@ -81,8 +81,8 @@ class GraduateParkingBoyTest {
     @Test
     void should_pick_up_a_car_successful_when_pick_up_a_car_by_graduate_parking_boy_given_a_ticket_from_one_parking() {
         Car car = new Car();
-        Parking parking1 = new Parking(1);
-        List<Parking> parkingList = List.of(parking1);
+        Parking parking = new Parking(1);
+        List<Parking> parkingList = List.of(parking);
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
         Ticket ticket = graduateParkingBoy.park(car);
 
@@ -121,11 +121,11 @@ class GraduateParkingBoyTest {
 
     @Test
     void should_show_tip_invalid_ticket_when_pick_up_a_car_by_graduate_parking_boy_given_a_used_ticket() {
-        Car car1 = new Car();
-        Parking parking1 = new Parking(1);
-        List<Parking> parkingList = List.of(parking1);
+        Car car = new Car();
+        Parking parking = new Parking(1);
+        List<Parking> parkingList = List.of(parking);
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
-        Ticket ticket = graduateParkingBoy.park(car1);
+        Ticket ticket = graduateParkingBoy.park(car);
         graduateParkingBoy.pickUp(ticket);
 
         assertThrows(InvalidTicketException.class, () -> graduateParkingBoy.pickUp(ticket));
@@ -133,11 +133,11 @@ class GraduateParkingBoyTest {
 
     @Test
     void should_show_tip_invalid_ticket_when_pick_up_a_car_by_graduate_parking_boy_given_a_fake_ticket() {
-        Car car1 = new Car();
-        Parking parking1 = new Parking(1);
-        List<Parking> parkingList = List.of(parking1);
+        Car car = new Car();
+        Parking parking = new Parking(1);
+        List<Parking> parkingList = List.of(parking);
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
-        graduateParkingBoy.park(car1);
+        graduateParkingBoy.park(car);
 
         assertThrows(InvalidTicketException.class, () -> graduateParkingBoy.pickUp(new Ticket()));
     }
