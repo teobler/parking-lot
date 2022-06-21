@@ -5,7 +5,6 @@ import org.oobootcamp.parking.lot.exception.FullyParkedException;
 import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingTest {
@@ -19,6 +18,17 @@ public class ParkingTest {
         // 1. how do we verify this case when there is nothing
         // 2. should we modify test after some feature is done, then we may need to modify production code as well?
         assertThat(ticket).isNotNull();
+    }
+
+    @Test
+    void should_return_a_car_when_pick_up_a_car_given_a_valid_ticket() {
+        Parking parking = new Parking(1);
+        Car car1 = new Car();
+        Ticket ticket = parking.park(car1);
+
+        Car car2 = parking.pickUp(ticket);
+
+        assertThat(car1).isSameAs(car2);
     }
 
     @Test
@@ -48,18 +58,6 @@ public class ParkingTest {
 
         assertThat(ticket).isNotNull();
     }
-
-    @Test
-    void should_return_a_car_when_pick_up_a_car_given_a_valid_ticket() {
-        Parking parking = new Parking(1);
-        Car car1 = new Car();
-        Ticket ticket = parking.park(car1);
-
-        Object car2 = parking.pickUp(ticket);
-
-        assertThat(car1).isEqualTo(car2);
-    }
-
 
     @Test
     void should_show_tip_when_pick_up_a_car_given_a_ticket_twice() {
