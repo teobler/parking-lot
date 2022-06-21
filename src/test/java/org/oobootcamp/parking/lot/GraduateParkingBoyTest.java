@@ -79,19 +79,44 @@ class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_pick_up_a_car_successful_when_pick_up_a_car_by_graduate_parking_boy_given_a_ticket_from_parking() {
-        Car car1 = new Car();
-        Car car2 = new Car();
+    void should_pick_up_a_car_successful_when_pick_up_a_car_by_graduate_parking_boy_given_a_ticket_from_one_parking() {
+        Car car = new Car();
+        Parking parking1 = new Parking(1);
+        List<Parking> parkingList = List.of(parking1);
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
+        Ticket ticket = graduateParkingBoy.park(car);
+
+        Car pickedUpCar = graduateParkingBoy.pickUp(ticket);
+
+        assertThat(pickedUpCar).isSameAs(car);
+    }
+
+    @Test
+    void should_pick_up_a_car_successful_when_pick_up_a_car_by_graduate_parking_boy_given_a_ticket_from_the_first_parking() {
+        Car car = new Car();
         Parking parking1 = new Parking(1);
         Parking parking2 = new Parking(1);
-        parking1.park(car1);
         List<Parking> parkingList = List.of(parking1, parking2);
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
-        Ticket ticket = graduateParkingBoy.park(car2);
+        Ticket ticket = parking1.park(car);
 
-        Car actual = graduateParkingBoy.pickUp(ticket);
+        Car pickedUpCar = graduateParkingBoy.pickUp(ticket);
 
-        assertThat(actual).isEqualTo(car2);
+        assertThat(pickedUpCar).isEqualTo(car);
+    }
+
+    @Test
+    void should_pick_up_a_car_successful_when_pick_up_a_car_by_graduate_parking_boy_given_a_ticket_from_the_second_parking() {
+        Car car = new Car();
+        Parking parking1 = new Parking(1);
+        Parking parking2 = new Parking(1);
+        List<Parking> parkingList = List.of(parking1, parking2);
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
+        Ticket ticket = parking2.park(car);
+
+        Car pickedUpCar = graduateParkingBoy.pickUp(ticket);
+
+        assertThat(pickedUpCar).isEqualTo(car);
     }
 
     @Test
