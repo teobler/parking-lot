@@ -42,26 +42,6 @@ public class ParkingTest {
     }
 
     @Test
-    void should_show_tip_when_parking_2_car_given_1_parking_lot() {
-        Parking parking = new Parking(1);
-        Car car1 = new Car();
-        Car car2 = new Car();
-        parking.park(car1);
-
-        assertThrows(FullyParkedException.class, () -> parking.park(car2));
-    }
-
-    @Test
-    void should_return_ticket_when_parking_a_car_successful() {
-        Parking parking = new Parking(1);
-        Car car1 = new Car();
-
-        Ticket ticket = parking.park(car1);
-
-        assertThat(ticket).isNotNull();
-    }
-
-    @Test
     void should_show_tip_when_pick_up_a_car_given_a_ticket_twice() {
         Parking parking = new Parking(1);
         Car car1 = new Car();
