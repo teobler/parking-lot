@@ -9,14 +9,16 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingTest {
-    // this test is useless?
-    // should we modify test after some feature is done
     @Test
-    void should_parking_successful_when_parking_a_car_given_1_empty_parking_lot() {
+    void should_parking_successful_and_return_a_ticket_when_park_a_car_given_an_empty_parking_lot() {
         Parking parking = new Parking(1);
         Car car = new Car();
 
-        assertDoesNotThrow(() -> parking.park(car));
+        Ticket ticket = parking.park(car);
+
+        // 1. how do we verify this case when there is nothing
+        // 2. should we modify test after some feature is done, then we may need to modify production code as well?
+        assertThat(ticket).isNotNull();
     }
 
     @Test
