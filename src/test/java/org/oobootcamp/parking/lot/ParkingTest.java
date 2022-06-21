@@ -33,10 +33,12 @@ public class ParkingTest {
 
     @Test
     void should_show_tip_when_parking_a_car_given_non_empty_parking_lot() {
-        Parking parking = new Parking(0);
-        Car car = new Car();
+        Parking parking = new Parking(1);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        parking.park(car1);
 
-        assertThrows(FullyParkedException.class, () -> parking.park(car));
+        assertThrows(FullyParkedException.class, () -> parking.park(car2));
     }
 
     @Test
