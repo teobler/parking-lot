@@ -6,7 +6,7 @@ import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 import java.util.HashMap;
 
 public class Parking {
-    private int capacity;
+    private final int capacity;
 
     private final HashMap<Ticket, Car> parkedCars = new HashMap<>();
 
@@ -15,20 +15,23 @@ public class Parking {
     }
 
     public Ticket park(Car car) {
-        if (this.capacity == 0) {
+        if (!this.hasEmptyLot()) {
             throw new FullyParkedException();
         }
-        this.capacity -= 1;
+
         Ticket ticket = new Ticket();
         this.parkedCars.put(ticket, car);
+
         return ticket;
     }
 
     public Car pickUp(Ticket ticket) {
         Car car = this.parkedCars.get(ticket);
+
         if (car == null) {
             throw new InvalidTicketException();
         }
+
         this.parkedCars.remove(ticket);
         return car;
     }
