@@ -52,7 +52,7 @@ class GraduateParkingBoyTest {
     }
 
     @Test
-    void should_show_tip_parking_is_full_when_park_a_car_by_graduate_parking_boy_given_non_available_parking_lot() {
+    void should_show_tip_parking_is_full_when_park_a_car_by_graduate_parking_boy_given_one_non_available_parking_lot() {
         Car car1 = new Car();
         Car car2 = new Car();
         Parking parking1 = new Parking(1);
@@ -61,6 +61,21 @@ class GraduateParkingBoyTest {
         GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
 
         assertThrows(FullyParkedException.class, () -> graduateParkingBoy.park(car2));
+    }
+
+    @Test
+    void should_show_tip_parking_is_full_when_park_a_car_by_graduate_parking_boy_given_two_non_available_parking_lots() {
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Car car3 = new Car();
+        Parking parking1 = new Parking(1);
+        Parking parking2 = new Parking(1);
+        parking1.park(car1);
+        parking2.park(car2);
+        List<Parking> parkingList = List.of(parking1, parking2);
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingList);
+
+        assertThrows(FullyParkedException.class, () -> graduateParkingBoy.park(car3));
     }
 
     @Test
