@@ -26,12 +26,16 @@ public class Parking {
         return ticket;
     }
 
-    public Object pickUp(Ticket ticket) {
-        Object car = this.parkingLots.get(ticket);
+    public Car pickUp(Ticket ticket) {
+        Car car = this.parkingLots.get(ticket);
         if (car == null) {
             throw new RuntimeException("无效票");
         }
         this.parkingLots.remove(ticket);
         return car;
+    }
+
+    public Boolean hasCar(Ticket ticket) {
+        return this.parkingLots.containsKey(ticket);
     }
 }
