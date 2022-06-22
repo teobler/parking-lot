@@ -5,12 +5,12 @@ import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 
 import java.util.HashMap;
 
-public class Parking {
+public class ParkingLot {
     private final int capacity;
 
     private final HashMap<Ticket, Car> parkedCars = new HashMap<>();
 
-    public Parking(int capacity) {
+    public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
 

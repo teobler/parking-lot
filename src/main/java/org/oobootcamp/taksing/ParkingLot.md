@@ -21,7 +21,7 @@ tasking given Parking With 1 Empty Parking Lot when Parking A Car then return a 
 
 
 ##AC 可以根据有效的票据取车
-tasking given a valid ticket when pick up a car from parking lot then return a car
+tasking given a valid ticket when pick up a car from parkingLot lot then return a car
 
 
 
@@ -29,5 +29,5 @@ tasking given a valid ticket when pick up a car from parking lot then return a c
 
 
 ##AC 无效票，提示『无效票』
-tasking given an invalid ticket when pick up a car from parking lot then show a tip "无效票"
+tasking given an invalid ticket when pick up a car from parkingLot lot then show a tip "无效票"
 

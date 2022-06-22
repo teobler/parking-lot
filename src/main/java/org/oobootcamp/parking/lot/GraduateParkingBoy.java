@@ -6,23 +6,23 @@ import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 import java.util.List;
 
 public class GraduateParkingBoy {
-    private final List<Parking> parkingList;
+    private final List<ParkingLot> parkingLotList;
 
-    public GraduateParkingBoy(List<Parking> parkingList) {
-        this.parkingList = parkingList;
+    public GraduateParkingBoy(List<ParkingLot> parkingLotList) {
+        this.parkingLotList = parkingLotList;
     }
 
     public Ticket park(Car car) {
-        return this.parkingList.stream()
-                .filter(Parking::hasEmptyLot)
+        return this.parkingLotList.stream()
+                .filter(ParkingLot::hasEmptyLot)
                 .findFirst()
                 .orElseThrow(FullyParkedException::new)
                 .park(car);
     }
 
     public Car pickUp(Ticket ticket) {
-        return this.parkingList.stream()
-                .filter(parking -> parking.hasCar(ticket))
+        return this.parkingLotList.stream()
+                .filter(parkingLot -> parkingLot.hasCar(ticket))
                 .findFirst()
                 .orElseThrow(InvalidTicketException::new)
                 .pickUp(ticket);
