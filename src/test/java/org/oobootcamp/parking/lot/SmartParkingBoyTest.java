@@ -68,4 +68,18 @@ public class SmartParkingBoyTest {
 
         assertThrows(FullyParkedException.class, () -> smartParkingBoy.park(secondCar));
     }
+
+    @Test
+    void should_show_fully_parked_tip_when_park_a_car_given_two_parking_lot_without_empty_spot() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        Car thirdCar = new Car();
+        firstParkingLot.park(firstCar);
+        secondParkingLot.park(secondCar);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(firstParkingLot, secondParkingLot));
+
+        assertThrows(FullyParkedException.class, () -> smartParkingBoy.park(thirdCar));
+    }
 }
