@@ -1,5 +1,6 @@
 package org.oobootcamp.parking.lot;
 
+import org.oobootcamp.parking.lot.exception.FullyParkedException;
 import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 
 import java.util.Comparator;
@@ -16,7 +17,7 @@ public class SmartParkingBoy {
     public Ticket park(Car car) {
         return this.parkingLots.stream()
                 .max(Comparator.comparing(ParkingLot::getEmptySpots))
-                .get()
+                .orElseThrow(FullyParkedException::new)
                 .park(car);
     }
 
