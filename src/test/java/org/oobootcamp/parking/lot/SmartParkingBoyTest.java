@@ -1,9 +1,11 @@
 package org.oobootcamp.parking.lot;
 
 import org.junit.jupiter.api.Test;
+import org.oobootcamp.parking.lot.exception.FullyParkedException;
 
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SmartParkingBoyTest {
     @Test
@@ -54,5 +56,16 @@ public class SmartParkingBoyTest {
         Ticket ticket = smartParkingBoy.park(car);
 
         assertThat(firstParkingLot.hasCar(ticket)).isTrue();
+    }
+
+    @Test
+    void should_show_fully_parked_tip_when_park_a_car_given_one_parking_lot_without_empty_spot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car firstCar = new Car();
+        Car secondCar = new Car();
+        parkingLot.park(firstCar);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLot));
+
+        assertThrows(FullyParkedException.class, () -> smartParkingBoy.park(secondCar));
     }
 }
