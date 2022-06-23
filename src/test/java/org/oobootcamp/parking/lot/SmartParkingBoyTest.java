@@ -99,12 +99,25 @@ public class SmartParkingBoyTest {
     void should_get_a_car_from_first_parking_lot_when_pick_up_a_car_given_a_car_parked_in_first_parking_lot() {
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(1);
-        Car firstCar = new Car();
+        Car car = new Car();
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(firstParkingLot, secondParkingLot));
-        Ticket ticket = firstParkingLot.park(firstCar);
+        Ticket ticket = firstParkingLot.park(car);
 
         Car pickedUpCar = smartParkingBoy.pickUp(ticket);
 
-        assertThat(pickedUpCar).isSameAs(firstCar);
+        assertThat(pickedUpCar).isSameAs(car);
+    }
+
+    @Test
+    void should_get_a_car_from_second_parking_lot_when_pick_up_a_car_given_a_car_parked_in_second_parking_lot() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        Car car = new Car();
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(firstParkingLot, secondParkingLot));
+        Ticket ticket = secondParkingLot.park(car);
+
+        Car pickedUpCar = smartParkingBoy.pickUp(ticket);
+
+        assertThat(pickedUpCar).isSameAs(car);
     }
 }
