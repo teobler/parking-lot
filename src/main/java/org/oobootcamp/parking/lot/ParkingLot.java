@@ -43,4 +43,8 @@ public class ParkingLot {
     public Boolean hasCar(Ticket ticket) {
         return this.parkedCars.containsKey(ticket);
     }
+
+    public Integer getEmptySpots() {
+        return this.capacity - this.parkedCars.size();
+    }
 }

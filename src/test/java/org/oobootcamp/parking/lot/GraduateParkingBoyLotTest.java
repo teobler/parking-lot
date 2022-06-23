@@ -9,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class GraduateParkingBoyTestLot {
+public class GraduateParkingBoyLotTest {
     @Test
     void should_park_a_car_successful_when_park_a_car_by_graduate_parking_boy_given_one_parking() {
         Car car = new Car();
