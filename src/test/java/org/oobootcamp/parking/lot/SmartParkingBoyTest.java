@@ -82,4 +82,16 @@ public class SmartParkingBoyTest {
 
         assertThrows(FullyParkedException.class, () -> smartParkingBoy.park(thirdCar));
     }
+
+    @Test
+    void should_get_a_car_when_pick_up_a_car_given_ticket_from_smart_parking_boy() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car firstCar = new Car();
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLot));
+        Ticket ticket = parkingLot.park(firstCar);
+
+        Car pickedUpCar = smartParkingBoy.pickUp(ticket);
+
+        assertThat(pickedUpCar).isSameAs(firstCar);
+    }
 }

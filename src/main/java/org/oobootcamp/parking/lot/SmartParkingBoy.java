@@ -17,4 +17,12 @@ public class SmartParkingBoy {
                 .get()
                 .park(car);
     }
+
+    public Car pickUp(Ticket ticket) {
+        return this.parkingLots.stream()
+                .filter(parkingLot -> parkingLot.hasCar(ticket))
+                .findFirst()
+                .get()
+                .pickUp(ticket);
+    }
 }
