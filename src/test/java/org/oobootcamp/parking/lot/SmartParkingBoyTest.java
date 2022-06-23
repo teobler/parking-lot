@@ -42,4 +42,17 @@ public class SmartParkingBoyTest {
 
         assertThat(secondParkingLot.hasCar(ticket)).isTrue();
     }
+
+    @Test
+    void should_parking_a_car_to_frst_parking_lot_and_get_ticket_when_park_a_car_given_two_parking_lot_with_same_empty_spots() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(firstParkingLot, secondParkingLot));
+        Car car = new Car();
+
+        Ticket ticket = smartParkingBoy.park(car);
+
+        assertThat(firstParkingLot.hasCar(ticket)).isTrue();
+    }
 }
