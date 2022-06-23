@@ -94,4 +94,17 @@ public class SmartParkingBoyTest {
 
         assertThat(pickedUpCar).isSameAs(firstCar);
     }
+
+    @Test
+    void should_get_a_car_from_first_parking_lot_when_pick_up_a_car_given_a_car_parked_in_first_parking_lot() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        Car firstCar = new Car();
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(firstParkingLot, secondParkingLot));
+        Ticket ticket = firstParkingLot.park(firstCar);
+
+        Car pickedUpCar = smartParkingBoy.pickUp(ticket);
+
+        assertThat(pickedUpCar).isSameAs(firstCar);
+    }
 }
