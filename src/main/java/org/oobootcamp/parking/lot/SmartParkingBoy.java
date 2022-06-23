@@ -1,5 +1,6 @@
 package org.oobootcamp.parking.lot;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class SmartParkingBoy {
@@ -11,11 +12,9 @@ public class SmartParkingBoy {
     }
 
     public Ticket park(Car car) {
-        ParkingLot parkingLot = this.parkingLots.stream()
-                .max((parkingLot1, parkingLot2) ->
-                        parkingLot1.getEmptySpots().compareTo(parkingLot2.getEmptySpots()))
-                .get();
-
-        return parkingLot.park(car);
+        return this.parkingLots.stream()
+                .max(Comparator.comparing(ParkingLot::getEmptySpots))
+                .get()
+                .park(car);
     }
 }
