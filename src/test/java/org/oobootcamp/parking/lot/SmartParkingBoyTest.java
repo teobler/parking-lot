@@ -2,6 +2,7 @@ package org.oobootcamp.parking.lot;
 
 import org.junit.jupiter.api.Test;
 import org.oobootcamp.parking.lot.exception.FullyParkedException;
+import org.oobootcamp.parking.lot.exception.InvalidTicketException;
 
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -119,5 +120,16 @@ public class SmartParkingBoyTest {
         Car pickedUpCar = smartParkingBoy.pickUp(ticket);
 
         assertThat(pickedUpCar).isSameAs(car);
+    }
+
+    @Test
+    void should_show_invalid_ticket_tip_when_pick_up_a_car_given_a_used_ticket() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car();
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLot));
+        Ticket ticket = parkingLot.park(car);
+        parkingLot.pickUp(ticket);
+
+        assertThrows(InvalidTicketException.class, () -> smartParkingBoy.pickUp(ticket));
     }
 }

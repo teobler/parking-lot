@@ -1,5 +1,7 @@
 package org.oobootcamp.parking.lot;
 
+import org.oobootcamp.parking.lot.exception.InvalidTicketException;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class SmartParkingBoy {
         return this.parkingLots.stream()
                 .filter(parkingLot -> parkingLot.hasCar(ticket))
                 .findFirst()
-                .get()
+                .orElseThrow(InvalidTicketException::new)
                 .pickUp(ticket);
     }
 }
