@@ -132,4 +132,14 @@ public class SmartParkingBoyTest {
 
         assertThrows(InvalidTicketException.class, () -> smartParkingBoy.pickUp(ticket));
     }
+
+    @Test
+    void should_show_invalid_ticket_tip_when_pick_up_a_car_given_a_fake_ticket() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car();
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(List.of(parkingLot));
+        parkingLot.park(car);
+
+        assertThrows(InvalidTicketException.class, () -> smartParkingBoy.pickUp(new Ticket()));
+    }
 }
